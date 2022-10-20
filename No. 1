@@ -77,8 +77,6 @@ class RiverBarge extends Vehicle {
 $truck = new Truck(15000, 'Truck');
 $riverBarge = new RiverBarge(15000, 'Tongkang Sungai');
 
-
-?>
    
 -index-   
                 <b><?= $truck->getMaxLoad() . ' kg'; ?> <br></b>
