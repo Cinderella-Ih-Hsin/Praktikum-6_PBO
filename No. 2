@@ -1,0 +1,100 @@
+<?php 
+
+interface Flyer {
+    public function takeOff();
+    public function land();
+    public function fly();
+}
+
+
+class Airplane implements Flyer {
+    public function takeOff() {
+        return 'lepas landas (ya)';
+    }
+    
+    public function land() {
+        return 'mendarat (ya)';
+    }
+
+    public function fly() {
+        return 'terbang (ya)';
+    }
+}
+
+class Bird implements Flyer {
+    public function takeOff() {
+        return 'lepas landas (ya)';
+    }
+    
+    public function land() {
+        return 'mendarat  (ya)';
+    }
+
+    public function fly() {
+        return 'terbang (ya)';
+    }
+
+    public function buildNest() {
+        return 'membangun sarang (ya)';
+    }
+
+    public function layEggs() {
+        return 'bertelur (ya)';
+    }
+}
+
+class Superman implements Flyer {
+    public function takeOff() {
+        return 'lepas landas (ya)';
+    }
+    
+    public function land() {
+        return 'mendarat (ya)';
+    }
+
+    public function fly() {
+        return 'terbang (ya)';
+    }
+
+    public function leapBuilding() {
+        return 'melompati bangunan (ya)';
+    }
+
+    public function stopBullet() {
+        return 'menghentikan peluru (ya)';
+    }
+}
+
+$airplane = new Airplane;
+$bird = new Bird;
+$superman = new Superman;
+
+  					 echo "Superman";
+                    ?></b> <br>
+                <?= $superman->land(); ?> <br>
+                <?= $superman->takeOff(); ?> <br>
+                <?= $superman->fly(); ?> <br>
+                <?= $superman->leapBuilding(); ?> <br>
+                <?= $superman->stopBullet(); ?> <br>
+                <br>
+                <?php 
+                        echo "Bird";
+                    ?></b> <br>
+                <?= $bird->buildNest(); ?> <br>
+                <?= $bird->takeOff(); ?> <br>
+                <?= $bird->fly(); ?> <br>
+                <?= $bird->land(); ?> <br>
+                <?= $bird->layEggs(); ?> <br>
+                <br>
+                <?php 
+                        echo "Airplane";
+                    ?></b> <br>
+                <?= $airplane->takeOff(); ?> <br>
+                <?= $airplane->fly(); ?> <br>
+                <?= $airplane->land(); ?> <br>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
