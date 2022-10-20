@@ -1,0 +1,191 @@
+<?php 
+
+abstract class Vehicle {
+    private $load = 0;
+    protected $maxLoad = 0, $name;
+
+    protected function __construct($maxLoad, $name) {
+        $this->$maxLoad = $maxLoad;
+        $this->$name = $name;
+    }
+
+    public function getLoad() {
+        return $this->load;
+    }
+
+    public function getMaxLoad() {
+        echo 'Beban maksimal ' . $this->name . ' ' ;
+        return $this->maxLoad;
+    }
+
+    public function addBox($weight) {
+        if ($this->load >= $this->maxLoad) {
+            echo "$this->name menambah beban sebesar $weight ";
+            echo 'Beban telah maksimal tidak bisa menambah lagi';
+        }else {
+            $this->load += $weight;
+            echo "$this->name menambah beban sebesar $weight";
+        }
+    }
+
+    abstract public function calcFuelNeeds();
+
+    protected function calcFuelEfficiency() {
+        $range = 50000000;
+        $range /= $this->load;
+        return $range;
+    }
+
+    protected function calcTripDistance() {
+        return 500;
+    }
+}
+
+interface Flyer {
+    public function takeOff();
+    public function land();
+    public function fly();
+}
+
+interface Sailer {
+    public function dock();
+    public function cruise();
+}
+
+class RiverBarge2 extends Vehicle implements Sailer {
+    public function __construct($maxLoad, $name) {
+        $this->maxLoad = $maxLoad;
+        $this->name = $name;
+    }
+
+    public function calcFuelNeeds() {
+        $fuel = $this->calcFuelEfficiency();
+        $trip = $this->calcTripDistance();
+        
+        return ceil($fuel /= $trip);
+    }
+
+    public function dock() {
+        return $this->name . ' berhenti di dermaga';
+    }
+    
+    public function cruise() {
+        return $this->name . ' berlayar';
+    }
+}
+
+class Airplane2 implements Flyer {
+    public function takeOff() {
+        return 'Pesawat lepas landas';
+    }
+    public function land() {
+        return 'Pesawat mendarat';
+    }
+    public function fly() {
+        return 'Pesawat terbang';
+    }
+}
+
+class SeaPlane extends Vehicle implements Sailer {
+    public function __construct($maxLoad, $name) {
+        $this->maxLoad = $maxLoad;
+        $this->name = $name;
+    }
+
+    public function calcFuelNeeds() {
+        $fuel = $this->calcFuelEfficiency();
+        $trip = $this->calcTripDistance();
+       
+        return ceil($fuel /= $trip);
+    }
+
+    public function dock() {
+        return $this->name . ' berhenti di dermaga';
+    }
+    
+    public function cruise() {
+        return $this->name . ' berlayar';
+    }
+
+    public function takeOff() {
+        return $this->name . ' lepas landas';
+    }
+    
+    public function land() {
+        return $this->name . ' mendarat';
+    }
+
+    public function fly() {
+        return $this->name . ' terbang';
+    }
+}
+
+class Helicopter extends Vehicle {
+    public function __construct($maxLoad, $name) {
+        $this->maxLoad = $maxLoad;
+        $this->name = $name;
+    }
+
+    public function calcFuelNeeds() {
+        $fuel = $this->calcFuelEfficiency();
+        $trip = $this->calcTripDistance();
+     
+        return ceil($fuel /= $trip);
+    }
+    public function takeOff() {
+        return $this->name . ' lepas landas';
+    }
+    
+    public function land() {
+        return $this->name . ' mendarat';
+    }
+
+    public function fly() {
+        return $this->name . ' terbang';
+    }
+}
+
+$riverBarge2 = new RiverBarge2(15000, 'Getek');
+$seaPlane = new SeaPlane(15000, 'Lion');
+$helicopter = new Helicopter(15000, 'Paracoper');
+
+?>
+ <b><?= $riverBarge2->getMaxLoad() . ' kg'; ?> <br></b>
+                <?= $riverBarge2->addBox(3000) . ' kg'; ?> <br>
+                <?= $riverBarge2->addBox(4000) . ' kg'; ?> <br>
+                <?= $riverBarge2->addBox(4000) . ' kg'; ?> <br>
+                <?= $riverBarge2->addBox(3000) . ' kg'; ?> <br>
+                <?= $riverBarge2->dock(); ?> <br>
+                <?= $riverBarge2->cruise(); ?> <br>
+                <?php 
+                        echo "Bahan bakar yang dibutuhkan adalah " . $riverBarge2->calcFuelNeeds() . ' Liter'. '<br>';
+                    ?>
+
+                <b><?= $seaPlane->getMaxLoad() . ' kg'; ?> <br></b>
+                <?= $seaPlane->addBox(8000) . ' kg'; ?> <br>
+                <?= $seaPlane->addBox(7000) . ' kg'; ?> <br>
+                <?= $seaPlane->dock(); ?> <br>
+                <?= $seaPlane->cruise(); ?> <br>
+                <?= $seaPlane->takeOff(); ?> <br>
+                <?= $seaPlane->fly(); ?> <br>
+                <?= $seaPlane->land(); ?> <br>
+                <?php 
+                        echo "Bahan bakar yang dibutuhkan adalah " . $seaPlane->calcFuelNeeds() . ' Liter'. '<br>';
+                    ?>
+    </div>
+    <div class="col mx-auto border p-2 mt-2">
+                <b><?= $helicopter->getMaxLoad() . ' kg'; ?> <br></b>
+                <?= $helicopter->addBox(8000) . ' kg'; ?> <br>
+                <?= $helicopter->addBox(7000) . ' kg'; ?> <br>
+                <?= $helicopter->takeOff(); ?> <br>
+                <?= $helicopter->fly(); ?> <br>
+                <?= $helicopter->land(); ?> <br>
+                <?php 
+                        echo "Bahan bakar yang dibutuhkan adalah " . $helicopter->calcFuelNeeds() . ' Liter'. '<br>';
+                    ?>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>
